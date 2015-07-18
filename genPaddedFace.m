@@ -11,7 +11,8 @@
 clc; clear; close all;
 load('faceFilename.mat');% the original file names of 2222 faces
 imgReadPath = '../simi/static/images/2kfaces_new/';
-imgSavePath = '../simi/static/images/2kFemale';
+%imgSavePath = '../simi/static/images/2kFemale/';
+imgSavePath = './image_background/';
 
 % only take females.
 load('genderList.mat');% 0: female, 1: male
@@ -29,12 +30,13 @@ burlywood = [222,184,135];
 tan = [210, 180, 140];
 grayC = [128, 128, 128];
 blackC = [0, 0, 0];
-
+white = [255, 255, 255];
 % specify background color
-paddingColor = burlywood;
+paddingColor = white;
+%colorKeyword = {'burly','gray','black'};
 
 %% ========== Part 3: cropping and padding ============
-for curItr = 1 : feNum
+for curItr = 1 : 50%feNum
     curImInd = feList(curItr);
     fileName = faceFilename{curImInd};
     img = imread(sprintf('%s%s', imgReadPath, fileName));
@@ -66,7 +68,7 @@ for curItr = 1 : feNum
     pArray(:,:,1) = padarray(newImg(:,:,1),[(padH-imH)/2, (padW+mod(imW,2)-imW)/2], paddingColor(1),'both');
     pArray(:,:,2) = padarray(newImg(:,:,2),[(padH-imH)/2, (padW+mod(imW,2)-imW)/2], paddingColor(2),'both');
     pArray(:,:,3) = padarray(newImg(:,:,3),[(padH-imH)/2, (padW+mod(imW,2)-imW)/2], paddingColor(3),'both');
-    nameStr = sprintf('%s/F%d.jpg', imgSavePath, curItr);
+    nameStr = sprintf('%sF%d.jpg', imgSavePath, curItr);
     imwrite(pArray, nameStr, 'jpg');
 end
 

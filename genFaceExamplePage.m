@@ -26,7 +26,7 @@ figH = imH * hRep + padding * (hRep-1);
 paddingArray = zeros()
 
 counter = 1; 
-for curFig = 1 %: 6
+for curFig = 1 : 6
     h = figure; 
     for curSub = 1 : 16
         subplot(4, 4, curSub);
